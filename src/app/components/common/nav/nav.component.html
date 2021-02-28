@@ -1,0 +1,56 @@
+<mat-toolbar fxLayout="row" color="default">
+  <span fxFlex i18n>ToDoList App</span>
+  <mat-slide-toggle fxFlex (input)="onthemeChange($event)" i18n>{{
+    activeTheme
+  }}</mat-slide-toggle>
+
+  <div *ngIf="!islogged()">
+    <button mat-button [routerLink]="'/auth/login'" fxHide.xs i18n>
+      Login
+    </button>
+    <button mat-button [routerLink]="'/auth/login'" fxHide.xs i18n>
+      Register
+    </button>
+  </div>
+
+  <div *ngIf="islogged()" fxShow.sm="false" fxShow.xs="false">
+    <button mat-button>
+      <img class="user_avatar" *ngIf="user.photoURL" [src]="user.photoURL" />
+      <mat-icon *ngIf="!user.photoURL">account_circle</mat-icon
+      >{{ user.displayName }}({{ user.email }})
+    </button>
+    <button mat-button (click)="SignOut()" i18n>Logout</button>
+  </div>
+
+  <button
+    mat-icon-button
+    [matMenuTriggerFor]="dropMenu"
+    fxHide
+    fxShow.xs
+    fxShow.sm
+  >
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #dropMenu="matMenu">
+    <ng-container>
+      <div *ngIf="!islogged()">
+        <button [routerLink]="'/auth/login'" mat-menu-item i18n>Login</button>
+        <button [routerLink]="'/auth/login'" mat-menu-item i18n>
+          Register
+        </button>
+      </div>
+      <div *ngIf="islogged()">
+        <button mat-button>
+          <img
+            class="user_avatar"
+            *ngIf="user.photoURL"
+            [src]="user.photoURL"
+          />
+          <mat-icon *ngIf="!user.photoURL">account_circle</mat-icon
+          >{{ user.displayName }}({{ user.email }})
+        </button>
+        <button mat-button (click)="SignOut()" i18n>Logout</button>
+      </div>
+    </ng-container>
+  </mat-menu>
+</mat-toolbar>

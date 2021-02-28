@@ -1,0 +1,84 @@
+<mat-card class="example-card">
+  <mat-card-header class="mb-4">
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title i18n="@@todolist">Todo List</mat-card-title>
+    <button mat-raised-button (click)="openDialog()" class="ml-auto" i18n>
+      Add ToDo
+    </button>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div flexLayout="row">
+      <mat-form-field class="w-100 mb-4">
+      <input matInput placeholder="Filter" i18n-placeholder (keyup)="search($event)" >
+</mat-form-field>
+
+    </div>   
+     <table
+      #table
+      mat-table
+      [dataSource]="filteredTask"
+      cdkDropList
+      [cdkDropListData]="filteredTask"
+      (cdkDropListDropped)="drop($event)"
+      class="mat-elevation-z8 w-100"
+    >
+      <ng-container matColumnDef="sno">
+        <th mat-header-cell *matHeaderCellDef i18n>S.no</th>
+        <td mat-cell *matCellDef="let element; let i = index">
+          {{ i + 1 }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef i18n>Description</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.description }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef i18n>Action</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-checkbox
+            *ngIf="element.status != 'complete'"
+            class="example-margin"
+            [checked]="element.status == 'complete'"
+            (change)="updateStatus($event.checked, element.id)"
+          >
+            <span i18n>Mark Complete</span>
+          </mat-checkbox>
+          <button
+            mat-icon-button
+            *ngIf="element.status == 'complete'"
+            aria-label="Example icon button with a vertical three dot icon"
+          >
+            <mat-icon>check</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef i18n>Status</th>
+        <td mat-cell *matCellDef="let element">
+          <button
+            mat-mini-fab
+            (click)="removeTodo(element.id)"
+            color="primary"
+            aria-label="Example icon button with a delete icon"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        cdkDrag
+        [cdkDragData]="row"
+      ></tr>
+    </table>
+  </mat-card-content>
+  <mat-card-actions> </mat-card-actions>
+</mat-card>

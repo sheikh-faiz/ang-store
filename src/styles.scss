@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+$ang-text-primary: mat-palette($mat-light-blue);
+$ang-text-accent: mat-palette($mat-light-blue);
+$ang-text-warn: mat-palette($mat-red);
+
+$theme-dark: mat-dark-theme($ang-text-primary, $ang-text-accent, $ang-text-warn);
+$theme-light: mat-light-theme($ang-text-primary, $ang-text-accent, $ang-text-warn);
+
+.ang-test-theme-dark {
+    @include angular-material-theme($theme-dark);
+}
+
+.ang-test-theme-light {
+    @include angular-material-theme($theme-light);
+}
+
+.cdk-drag-dragging{
+    width: 100%;
+}

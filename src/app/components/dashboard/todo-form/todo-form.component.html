@@ -1,0 +1,41 @@
+<div class="d-flex">
+<h5 mat-dialog-title i18n>Add ToDo</h5>
+<button
+  mat-mini-fab
+  class="ml-auto"
+  color="warn"
+  (click)="dialogRef.close()"
+  aria-label="Example icon button with a delete icon"
+>
+  <mat-icon>close</mat-icon>
+</button>
+</div>
+<div mat-dialog-content>
+  <form #f="ngForm">
+    <mat-form-field class="w-100">
+      <input
+        [(ngModel)]="myTask"
+        name="myTask"
+        type="text"
+        matInput
+        placeholder="Enter Task"
+        i18n-placeholder
+        required
+        (keyup.enter)="saveTask()"
+      />
+    </mat-form-field>
+    <p *ngIf="loading">
+      <i class="fa fa-spinner fa-spin"></i>
+    </p>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button
+    class="btn btn-primary"
+    [disabled]="!f.valid"
+    (click)="saveTask()"
+    i18n
+  >
+    Save Task
+  </button>
+</div>

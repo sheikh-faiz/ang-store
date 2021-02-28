@@ -1,0 +1,57 @@
+<mat-card>
+  <mat-card-content>
+    <form
+      [formGroup]="form"
+      class="d-flex flex-column mb-4"
+      (ngSubmit)="onSubmit()"
+    >
+      <h2 i18n>Sign In</h2>
+
+      <mat-error *ngIf="registerInvalid" i18n>
+        The username and password were not recognised
+      </mat-error>
+
+      <mat-form-field class="full-width-input">
+        <input
+          matInput
+          placeholder="Email"
+          formControlName="username"
+          required
+        />
+
+        <mat-error i18n> Please provide a valid email address </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <input
+          matInput
+          type="password"
+          placeholder="Password"
+          formControlName="password"
+          required
+        />
+
+        <mat-error i18n> Please provide a valid password </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <input
+          matInput
+          type="password"
+          placeholder="Confirm Password"
+          formControlName="confirmPassword"
+          required
+        />
+
+        <mat-error i18n> Password do not match </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary">Register</button>
+    </form>
+    <div class="d-flex mb-2">
+      <label class="ml-2" i18n>Sign up with </label>
+      <a mat-button (click)="registerWithGoogle()" color="primary"> Google </a>
+    </div>
+    <div class="d-flex">
+      <label class="ml-2" i18n>Already Signup ? </label>
+      <a mat-button [routerLink]="'/auth/login'" color="primary"> Login </a>
+    </div>
+  </mat-card-content>
+</mat-card>

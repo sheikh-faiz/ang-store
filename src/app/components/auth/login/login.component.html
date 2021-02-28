@@ -1,0 +1,41 @@
+<mat-card>
+  <mat-card-content>
+    <form [formGroup]="form" class="d-flex flex-column" (ngSubmit)="onSubmit()">
+      <h2 i18n="logintitle|Title for login form@@logintitle">Log In</h2>
+
+      <mat-error *ngIf="loginInvalid" i18n="invalidcreds|message if the credentials are wrong@@invalidcreds">
+        The username and password were not recognised
+      </mat-error>
+
+      <mat-form-field class="full-width-input">
+        <input
+          matInput
+          placeholder="Email"
+          formControlName="username"
+          i18n-placeholder 
+          required
+        />
+
+        <mat-error i18n="invalidemailmessage|message to indicate the e ail is invalid@@invalidemailmessage"> Please provide a valid email address </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <input
+          matInput
+          type="password"
+          placeholder="Password"
+          formControlName="password"
+          i18n-placeholder
+          required
+        />
+
+        <mat-error i18n="invalidpassword|message for invalid password@@invalidpassword"> Please provide a valid password </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" i18n>Login</button>
+    </form>
+    <div class="d-flex">
+      <p class="my-2 mr-2" i18n>Don't have account</p>
+      <a [routerLink]="'/auth/register'" class="my-auto" color="primary" i18n>SignUp</a>
+    </div>
+    <a mat-button (click)="loginWithGoogle()" color="primary" i18n="@@loginwithgoogle">Login with Google </a>
+  </mat-card-content>
+</mat-card>
